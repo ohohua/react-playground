@@ -19,12 +19,12 @@ export default defineConfig({
   routes: [
     {
       path: '/',
-      redirect: '/home',
+      redirect: '/playground',
     },
     {
       name: '首页',
-      path: '/home',
-      component: './Home',
+      path: '/playground',
+      component: './Playground',
     },
   ],
 

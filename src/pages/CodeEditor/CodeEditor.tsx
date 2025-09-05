@@ -1,23 +1,32 @@
+import { PlaygroundContext } from '@/context/PlaygroundContext';
 import Editor, { OnMount } from '@monaco-editor/react';
+import { debounce } from 'lodash-es';
+import { editor } from 'monaco-editor';
+import { useContext } from 'react';
 import { createAta } from './ata';
 
-export function CodeEditor() {
-  const code = `import { useEffect, useState } from "react";
+interface Props {
+  option?: editor.IStandaloneEditorConstructionOptions;
+}
 
-  function App() {
-    const [num, setNum] = useState(() => {
-      const num1 = 1 + 2;
-      const num2 = 2 + 3;
-      return num1 + num2
-    });
-    return <div onClick={() => setNum((prevNum) => prevNum + 1)}>{num}</div>
-  }
+export function CodeEditor(props: Props) {
+  const { option } = props;
 
-  export default App;
-  `;
-
-  // Editor 挂载时
   const onEditorMount: OnMount = (editor, monaco) => {
+    // 配置格式化快捷键
+    editor.addCommand(
+      monaco.KeyMod.Alt | monaco.KeyMod.Shift | monaco.KeyCode.KeyF,
+      () => {
+        editor.getAction('editor.action.formatDocument')?.run();
+      },
+    );
+
+    // 配置编辑器的 tsconfig
+    monaco.languages.typescript.typescriptDefaults.setCompilerOptions({
+      jsx: monaco.languages.typescript.JsxEmit.Preserve,
+      esModuleInterop: true,
+    });
+
     const ata = createAta((code, path) => {
       monaco.languages.typescript.typescriptDefaults.addExtraLib(
         code,
@@ -32,12 +41,21 @@ export function CodeEditor() {
     ata(editor.getValue());
   };
 
+  const { files, selectedFileName, setFiles } = useContext(PlaygroundContext);
+
+  const file = files[selectedFileName];
+
+  function onChange(value?: string) {
+    files[selectedFileName].value = value || '';
+    setFiles({ ...files });
+  }
   return (
     <Editor
       height="100%"
-      defaultLanguage="javascript"
+      language={file.language}
+      path={file.name}
       onMount={onEditorMount}
-      value={code}
+      value={file.value}
       options={{
         fontSize: 14,
         scrollBeyondLastLine: false,
@@ -48,7 +66,9 @@ export function CodeEditor() {
           verticalScrollbarSize: 6,
           horizontalScrollbarSize: 6,
         },
+        ...option,
       }}
+      onChange={debounce(onChange, 600)}
     />
   );
 }

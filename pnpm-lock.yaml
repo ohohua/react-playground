@@ -31,6 +31,15 @@ importers:
       antd:
         specifier: ^5.4.0
         version: 5.27.1(date-fns@2.30.0)(moment@2.30.1)(react-dom@18.3.1(react@18.3.1))(react@18.3.1)
+      clsx:
+        specifier: ^2.1.1
+        version: 2.1.1
+      lodash-es:
+        specifier: ^4.17.21
+        version: 4.17.21
+      monaco-editor:
+        specifier: ^0.52.2
+        version: 0.52.2
     devDependencies:
       '@types/babel__core':
         specifier: ^7.20.5
@@ -38,6 +47,9 @@ importers:
       '@types/babel__standalone':
         specifier: ^7.1.9
         version: 7.1.9
+      '@types/lodash-es':
+        specifier: ^4.17.12
+        version: 4.17.12
       '@types/react':
         specifier: ^18.0.33
         version: 18.3.24
@@ -2395,6 +2407,20 @@ packages:
         tarball: https://registry.npmjs.org/@types/json-schema/-/json-schema-7.0.15.tgz,
       }
 
+  '@types/lodash-es@4.17.12':
+    resolution:
+      {
+        integrity: sha512-0NgftHUcV4v34VhXm8QBSftKVXtbkBG3ViCjs6+eJ5a6y6Mi/jiFGPc1sC7QK+9BFhWrURE3EOggmWaSxL9OzQ==,
+        tarball: https://registry.npmjs.org/@types/lodash-es/-/lodash-es-4.17.12.tgz,
+      }
+
+  '@types/lodash@4.17.20':
+    resolution:
+      {
+        integrity: sha512-H3MHACvFUEiujabxhaI/ImO6gUrd8oOurg7LQtS7mbwIXA/cUqWrvBsaeJ23aZEPk1TAYkurjfMbSELfoCXlGA==,
+        tarball: https://registry.npmjs.org/@types/lodash/-/lodash-4.17.20.tgz,
+      }
+
   '@types/minimist@1.2.5':
     resolution:
       {
@@ -4037,6 +4063,14 @@ packages:
       {
         integrity: sha512-beMpP7BOtTipFuW8hrJvREQ2DrRu3BE7by0ZpibtfBA+qfHYvMGTc2Yb1JMYPKg/JUw0CHYvpg796aNTSW9z7Q==,
         tarball: https://registry.npmjs.org/clone-regexp/-/clone-regexp-2.2.0.tgz,
+      }
+    engines: { node: '>=6' }
+
+  clsx@2.1.1:
+    resolution:
+      {
+        integrity: sha512-eYm0QWBtUrBWZWG0d386OGAw16Z995PiOVo2B7bjWSbHedGl5e0ZWaq65kOGgUSNesEIDkB9ISbTg/JK9dhCZA==,
+        tarball: https://registry.npmjs.org/clsx/-/clsx-2.1.1.tgz,
       }
     engines: { node: '>=6' }
 
@@ -13660,6 +13694,12 @@ snapshots:
 
   '@types/json-schema@7.0.15': {}
 
+  '@types/lodash-es@4.17.12':
+    dependencies:
+      '@types/lodash': 4.17.20
+
+  '@types/lodash@4.17.20': {}
+
   '@types/minimist@1.2.5': {}
 
   '@types/node@24.3.0':
@@ -15036,6 +15076,8 @@ snapshots:
   clone-regexp@2.2.0:
     dependencies:
       is-regexp: 2.1.0
+
+  clsx@2.1.1: {}
 
   color-convert@1.9.3:
     dependencies:

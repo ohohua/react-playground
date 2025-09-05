@@ -18,11 +18,15 @@
     "@monaco-editor/react": "^4.7.0",
     "@typescript/ata": "^0.9.8",
     "@umijs/max": "^4.4.12",
-    "antd": "^5.4.0"
+    "antd": "^5.4.0",
+    "clsx": "^2.1.1",
+    "lodash-es": "^4.17.21",
+    "monaco-editor": "^0.52.2"
   },
   "devDependencies": {
     "@types/babel__core": "^7.20.5",
     "@types/babel__standalone": "^7.1.9",
+    "@types/lodash-es": "^4.17.12",
     "@types/react": "^18.0.33",
     "@types/react-dom": "^18.0.11",
     "husky": "^9",

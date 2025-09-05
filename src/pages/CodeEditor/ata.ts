@@ -27,6 +27,4 @@ export function createAta(onDownloadFile: OnDownloadFile) {
   });
 
   return ata;
-  // Run that function with the new sourcefile
-  // ata(`import danger from "danger"`)
 }
