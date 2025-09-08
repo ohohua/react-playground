@@ -1,14 +1,9 @@
 import { Splitter } from 'antd';
 import { CodeEditor } from '../CodeEditor/CodeEditor';
-// @ts-ignore
 import { PlaygroundProvider } from '../../context/PlaygroundContext';
 import { FileNameList } from '../CodeEditor/FileNameList';
-// @ts-ignore
-import iframeRaw from '../Preview/iframe.html';
+import { Preview } from '../Preview';
 
-const iframeUrl = URL.createObjectURL(
-  new Blob([iframeRaw], { type: 'text/html' }),
-);
 
 function App() {
   return (
@@ -20,10 +15,7 @@ function App() {
             <CodeEditor />
           </Splitter.Panel>
           <Splitter.Panel>
-            <iframe
-              src={iframeUrl}
-              style={{ width: '100%', height: '500px' }}
-            />
+            <Preview />
           </Splitter.Panel>
         </Splitter>
       </div>

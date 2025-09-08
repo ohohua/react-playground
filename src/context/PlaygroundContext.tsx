@@ -2,7 +2,7 @@ import { initFiles } from '@/pages/Playground/files';
 import { FileName, fileName2Language } from '@/utils/fileName2language';
 import { createContext, PropsWithChildren, useState } from 'react';
 
-interface File {
+export interface File {
   name: string;
   value: string;
   language: string;
