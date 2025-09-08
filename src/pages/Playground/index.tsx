@@ -1,9 +1,8 @@
 import { Splitter } from 'antd';
-import { CodeEditor } from '../CodeEditor/CodeEditor';
 import { PlaygroundProvider } from '../../context/PlaygroundContext';
+import { CodeEditor } from '../CodeEditor/CodeEditor';
 import { FileNameList } from '../CodeEditor/FileNameList';
 import { Preview } from '../Preview';
-
 
 function App() {
   return (
