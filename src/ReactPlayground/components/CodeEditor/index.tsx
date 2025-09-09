@@ -6,13 +6,11 @@ import { debounce } from 'lodash-es';
 
 export default function CodeEditor() {
 
-    const { 
+    const {
         theme,
-        files, 
-        setFiles, 
-        selectedFileName, 
-        setSelectedFileName
-    } = useContext(PlaygroundContext)
+        files,
+        setFiles,
+        selectedFileName } = useContext(PlaygroundContext)
 
     const file = files[selectedFileName];
 
@@ -23,10 +21,10 @@ export default function CodeEditor() {
 
     return (
         <div style={{ display: 'flex', flexDirection: 'column', height: '100%' }}>
-            <FileNameList/>
+            <FileNameList />
             <Editor file={file} onChange={debounce(onEditorChange, 500)} options={{
                 theme: `vs-${theme}`
-            }}/>
+            }} />
         </div>
     )
 }

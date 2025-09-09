@@ -58,11 +58,11 @@ export default function Editor(props: Props) {
                 fontSize: 14,
                 scrollBeyondLastLine: false,
                 minimap: {
-                  enabled: false,
+                    enabled: false,
                 },
                 scrollbar: {
-                  verticalScrollbarSize: 6,
-                  horizontalScrollbarSize: 6,
+                    verticalScrollbarSize: 6,
+                    horizontalScrollbarSize: 6,
                 },
                 ...options
             }

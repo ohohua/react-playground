@@ -1,4 +1,4 @@
-import React, { PropsWithChildren, createContext, useEffect, useState } from 'react'
+import { PropsWithChildren, createContext, useEffect, useState } from 'react'
 import { compress, fileName2Language, uncompress } from './utils'
 import { initFiles } from './files'
 
@@ -33,8 +33,8 @@ export const PlaygroundContext = createContext<PlaygroundContext>({
 const getFilesFromUrl = () => {
   let files: Files | undefined
   try {
-      const hash = uncompress(window.location.hash.slice(1))
-      files = JSON.parse(hash)
+    const hash = uncompress(window.location.hash.slice(1))
+    files = JSON.parse(hash)
   } catch (error) {
     console.error(error)
   }
@@ -43,7 +43,7 @@ const getFilesFromUrl = () => {
 
 export const PlaygroundProvider = (props: PropsWithChildren) => {
   const { children } = props
-  const [files, setFiles] = useState<Files>( getFilesFromUrl() || initFiles)
+  const [files, setFiles] = useState<Files>(getFilesFromUrl() || initFiles)
   const [selectedFileName, setSelectedFileName] = useState('App.tsx');
   const [theme, setTheme] = useState<Theme>('light')
 
