@@ -7,7 +7,7 @@ export const beforeTransformCode = (filename: string, code: string) => {
     let _code = code
     const regexReact = /import\s+React/g
     if ((filename.endsWith('.jsx') || filename.endsWith('.tsx')) && !regexReact.test(code)) {
-      _code = `import React from 'react';\n${code}`
+        _code = `import React from 'react';\n${code}`
     }
     return _code
 }
@@ -17,10 +17,10 @@ export const babelTransform = (filename: string, code: string, files: Files) => 
     let result = ''
     try {
         result = transform(_code, {
-        presets: ['react', 'typescript'],
-        filename,
-        plugins: [customResolver(files)],
-        retainLines: true
+            presets: ['react', 'typescript'],
+            filename,
+            plugins: [customResolver(files)],
+            retainLines: true
         }).code!
     } catch (e) {
         console.error('编译出错', e);
@@ -32,8 +32,8 @@ const getModuleFile = (files: Files, modulePath: string) => {
     let moduleName = modulePath.split('./').pop() || ''
     if (!moduleName.includes('.')) {
         const realModuleName = Object.keys(files).filter(key => {
-            return key.endsWith('.ts') 
-                || key.endsWith('.tsx') 
+            return key.endsWith('.ts')
+                || key.endsWith('.tsx')
                 || key.endsWith('.js')
                 || key.endsWith('.jsx')
         }).find((key) => {
@@ -42,7 +42,7 @@ const getModuleFile = (files: Files, modulePath: string) => {
         if (realModuleName) {
             moduleName = realModuleName
         }
-      }
+    }
     return files[moduleName]
 }
 
@@ -72,9 +72,9 @@ function customResolver(files: Files): PluginObj {
         visitor: {
             ImportDeclaration(path) {
                 const modulePath = path.node.source.value
-                if(modulePath.startsWith('.')) {
+                if (modulePath.startsWith('.')) {
                     const file = getModuleFile(files, modulePath)
-                    if(!file) 
+                    if (!file)
                         return
 
                     if (file.name.endsWith('.css')) {
@@ -95,8 +95,8 @@ function customResolver(files: Files): PluginObj {
 }
 
 export const compile = (files: Files) => {
-  const main = files[ENTRY_FILE_NAME]
-  return babelTransform(ENTRY_FILE_NAME, main.value, files)
+    const main = files[ENTRY_FILE_NAME]
+    return babelTransform(ENTRY_FILE_NAME, main.value, files)
 }
 
 self.addEventListener('message', async ({ data }) => {
@@ -106,6 +106,6 @@ self.addEventListener('message', async ({ data }) => {
             data: compile(data)
         })
     } catch (e) {
-      self.postMessage({ type: 'ERROR', error: e })
+        self.postMessage({ type: 'ERROR', error: e })
     }
 })

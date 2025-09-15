@@ -1,6 +1,5 @@
 import { useContext, useEffect, useRef, useState } from "react"
 import { PlaygroundContext } from "../../PlaygroundContext"
-import Editor from "../CodeEditor/Editor";
 import iframeRaw from './iframe.html?raw'
 import { IMPORT_MAP_FILE_NAME } from "../../files";
 import { Message } from "../Message";
@@ -9,25 +8,25 @@ import { debounce } from "lodash-es";
 
 interface MessageData {
     data: {
-      type: string
-      message: string
+        type: string
+        message: string
     }
 }
 
 export default function Preview() {
 
-    const { files} = useContext(PlaygroundContext)
+    const { files } = useContext(PlaygroundContext)
     const [compiledCode, setCompiledCode] = useState('')
     const [error, setError] = useState('')
 
     const compilerWorkerRef = useRef<Worker>();
 
     useEffect(() => {
-        if(!compilerWorkerRef.current) {
+        if (!compilerWorkerRef.current) {
             compilerWorkerRef.current = new CompilerWorker();
-            compilerWorkerRef.current.addEventListener('message', ({data}) => {
+            compilerWorkerRef.current.addEventListener('message', ({ data }) => {
                 console.log('worker', data);
-                if(data.type === 'COMPILED_CODE') {
+                if (data.type === 'COMPILED_CODE') {
                     setCompiledCode(data.data);
                 } else {
                     // console.log('error', data);
@@ -42,9 +41,8 @@ export default function Preview() {
 
     const getIframeUrl = () => {
         const res = iframeRaw.replace(
-            '<script type="importmap"></script>', 
-            `<script type="importmap">${
-                files[IMPORT_MAP_FILE_NAME].value
+            '<script type="importmap"></script>',
+            `<script type="importmap">${files[IMPORT_MAP_FILE_NAME].value
             }</script>`
         ).replace(
             '<script type="module" id="appSrc"></script>',
@@ -62,18 +60,18 @@ export default function Preview() {
     const handleMessage = (msg: MessageData) => {
         const { type, message } = msg.data
         if (type === 'ERROR') {
-          setError(message)
+            setError(message)
         }
     }
 
     useEffect(() => {
         window.addEventListener('message', handleMessage)
         return () => {
-          window.removeEventListener('message', handleMessage)
+            window.removeEventListener('message', handleMessage)
         }
     }, [])
 
-    return <div style={{height: '100%'}}>
+    return <div style={{ height: '100%' }}>
         <iframe
             src={iframeUrl}
             style={{
